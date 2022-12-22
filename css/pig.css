@@ -1,0 +1,21 @@
+.xhjIsPig .pig1 {
+    width: 80px;
+    animation: xhjPigRun1 8s infinite;
+}
+
+.xhjIsPig .pig2 {
+    width: 80px;
+    animation: xhjPigRun2 8s infinite;
+}
+
+@keyframes xhjPigRun1 {
+    50% {
+        transform: translateX(-130px);
+    }
+}
+
+@keyframes xhjPigRun2 {
+    50% {
+        transform: translateX(130px);
+    }
+}

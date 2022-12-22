@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>相册</title>
+	<link rel="stylesheet" type="text/css" href="css/normalize.css" />
+	<link rel="stylesheet" type="text/css" href="css/htmleaf-demo.css">
+	<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+	<div class="htmleaf-container">
+		<div class='images'>
+		  <img class='image' src='img/1.jpg'>
+		  <img class='image' src='img/2.jpg'>
+		  <img class='image' src='img/3.jpg'>
+		  <img class='image' src='img/4.jpg'>
+		  <img class='image' src='img/5.jpg'>
+		  <img class='image' src='img/6.jpg'>
+		  <img class='image' src='img/7.jpg'>
+		  <img class='image' src='img/8.jpg'>
+		  <img class='image' src='img/9.gif'>
+		  <img class='image' src='img/10.jpg'>
+		  <img class='image' src='img/11.jpg'>
+		  <img class='image' src='img/12.jpg'>
+		</div>
+	</div>
+	
+	<script type="text/javascript">
+		(function() {
+			  var cssTransition, imageOffset, imageWidth, images, queue, timeout, touch;
+
+			  cssTransition = function() {
+			    var body, i, len, style, vendor, vendors;
+			    body = document.body || document.documentElement;
+			    style = body.style;
+			    vendors = ['Moz', 'Webkit', 'O'];
+			    if (typeof style['transition'] === 'string') {
+			      return true;
+			    }
+			    for (i = 0, len = vendors.length; i < len; i++) {
+			      vendor = vendors[i];
+			      if (typeof style[vendor + 'Transition'] === 'string') {
+			        return true;
+			      }
+			    }
+			    return false;
+			  };
+
+			  queue = false;
+
+			  touch = document.documentElement['ontouchstart'] !== void 0;
+
+			  images = document.querySelector('.images');
+
+			  imageWidth = images.firstElementChild.offsetWidth;
+
+			  imageOffset = images.firstElementChild.offsetLeft;
+
+			  timeout = cssTransition() ? [300, 400] : [0, 0];
+
+			  images.addEventListener((touch ? 'touchend' : 'click'), function(event) {
+			    var direction, lastClassList;
+			    if (queue) {
+			      return;
+			    }
+			    queue = true;
+			    if (((touch ? event.changedTouches[0].pageX : event.pageX) - imageOffset) > imageWidth / 2) {
+			      direction = 'slide-right';
+			    } else {
+			      direction = 'slide-left';
+			    }
+			    lastClassList = images.lastElementChild.classList;
+			    lastClassList.add(direction);
+			    return setTimeout(function() {
+			      lastClassList.remove(direction);
+			      lastClassList.add('back');
+			      return setTimeout(function() {
+			        images.insertBefore(images.lastElementChild, images.firstElementChild);
+			        lastClassList.remove('back');
+			        return queue = false;
+			      }, timeout[0]);
+			    }, timeout[1]);
+			  }, false);
+
+			}).call(this);
+	</script>
+</body>
+</html>

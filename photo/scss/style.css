@@ -1,0 +1,52 @@
+@import "compass/css3";
+
+html {
+  height: 100%;
+}
+
+body {
+  background-color: #f7f7f7;
+  @include background-image(radial-gradient(50% 50%, circle, #fff, #eee 25%, #aaa));
+  overflow: hidden;
+}
+
+.images {
+  cursor: pointer;
+  
+  &:hover {
+    .image {
+      &:nth-child(4) { @include transform(rotate(10deg) translateX(50px)); }
+      &:nth-child(3) { @include transform(rotate(3deg) translateX(75px)); }
+      &:nth-child(2) { @include transform(rotate(-2deg) translateX(-50px)); }
+      &:first-child   { @include transform(rotate(-8deg) translateX(-75px) translateY(-10px)); }
+    }
+  }
+}
+
+.image {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: 200px;
+  width: 200px;
+  margin-top: -110px;
+  margin-left: -105px;
+  border: 5px solid #fff;
+  border-bottom-width: 15px;
+  @include box-shadow(0 2px 5px rgba(#1e1e1e, 0.25));
+  z-index: 2;
+  @include transition(transform 0.3s ease-in-out);
+  
+  &:first-child  { @include transform(rotate(8deg)); }
+  &:nth-child(2) { @include transform(rotate(2deg)); }
+  &:nth-child(3) { @include transform(rotate(-3deg)); }
+  &:nth-child(4) { @include transform(rotate(-10deg)); }
+  &:last-child   { @include transform(rotate(-5deg)); }
+  
+  &.slide-right { @include transform(rotate(290deg) translateX(250px)); }
+  &.slide-left  { @include transform(rotate(-290deg) translateX(-250px)); }
+
+  &.back {
+    z-index: 1;
+  }
+}

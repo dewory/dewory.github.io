@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="msapplication-tap-highlight" content="no">
+  <title>游戏</title>
+  <link rel='stylesheet prefetch'
+    href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css'>
+  <link rel="stylesheet" type="text/css" href="css/normalize.css" />
+  <link rel="stylesheet" type="text/css" href="css/htmleaf-demo.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body ng-app="app" ng-controller="ctrl">
+  <main class="column" style="background-image: {{b}}">
+
+    <article class="column">
+      <div class="flip-container" ng-class="{'flip-me': answered}">
+        <div class="flipper">
+          <div class="front">
+            <div class="chip bg-light">
+              <span class="fa fa-hand-spock-o fa-fw ghost"></span>
+            </div>
+          </div>
+          <div class="back">
+            <div class="chip bg-light">
+              <span class="fa fa-hand-{{splashIcon}}-o fa-fw"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="answers row around" ng-class="{'ghost': spocked}">
+        <div class="column align-center">
+          <div class="chip" ng-class="uiSetMoveClasses('rock', 1)" ng-click="uiPlay('rock')">
+            <span class="fa fa-hand-rock-o fa-fw fa-2x"></span>
+          </div>
+        </div>
+        <div class="column align-center">
+          <div class="chip" ng-class="uiSetMoveClasses('paper', 2)" ng-click="uiPlay('paper')">
+            <span class="fa fa-hand-paper-o fa-fw fa-2x"></span>
+          </div>
+        </div>
+        <div class="column align-center">
+          <div class="chip" ng-class="uiSetMoveClasses('scissors', 3)" ng-click="uiPlay('scissors')">
+            <span class="fa fa-hand-scissors-o fa-fw fa-2x"></span>
+          </div>
+        </div>
+      </div>
+
+      <footer class="row around">
+        <div>
+          <span class="ghost">我</span>
+          <h1>{{score.me}}</h1>
+        </div>
+        <div>
+          <span class="ghost">电脑</span>
+          <h1>{{score.spock}}</h1>
+        </div>
+      </footer>
+
+    </article>
+
+    <div class="message-wrap content {{answered}}" ng-class="{'show': answered}">
+      <div class="message row align-center" ng-click="uiPlayAgain()"
+        ng-class="{'bg-warning': spocked, 'bg-info': winner==='tie','bg-success': winner=='me','bg-alert': winner=='spock'}">
+        <div class="text">{{message}}</div>
+        <div class="chip beacon-1">
+          <span class="fa fa-3x fa-refresh"></span>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js'></script>
+  <script src="js/main.js"></script>
+</body>
+
+</html>
